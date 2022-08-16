@@ -1,0 +1,35 @@
+{
+    "name": "mtg-lifecounter",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "cd server && npm start",
+      "start:prod": "node ./server/server.js",
+      "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+      "client": "cd client && npm run start",
+      "build": "cd client && npm run build",
+      "heroku-postbuild": "cd client npm run build",
+      "install": "cd server && npm i && cd ../client && npm i",
+      "seed": "node server/seeds/seed.js "
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/reagang1997/Sim-Legend.git"
+    },
+    "devDependencies": {
+      "concurrently": "^6.2.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/reagang1997/Sim-Legend/issues"
+    },
+    "homepage": "https://github.com/reagang1997/Sim-Legend#readme",
+    "dependencies": {
+      "axios": "^0.21.1",
+      "moment": "^2.29.1"
+    }
+  }
+  
