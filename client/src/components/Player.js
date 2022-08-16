@@ -24,7 +24,9 @@ const Player = ({ totalPlayers, playerNum, player }) => {
                 player: {
                     height: (100 / totalPlayers) + "%",
                     backgroundColor: player.color,
-                    transform: player.playerNum == 2 ? 'rotate(180deg)' : ""
+                    transform: player.playerNum == 2 ? 'rotate(180deg)' : "",
+                    margin: '10px',
+                    borderRadius: '10px'
                 },
                 grid: {
                     width: '100%',

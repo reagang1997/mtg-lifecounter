@@ -35,10 +35,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mtg-lifecounter", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mtg-lifecounter", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false
+// });
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
