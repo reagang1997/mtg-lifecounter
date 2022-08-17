@@ -5,64 +5,83 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import Options from "./Options";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { UPDATE_PLAYER, UPDATE_P_HEALTH } from "../utils/actions";
+
+
+
 const Player = ({ totalPlayers, playerNum, player }) => {
 
     const state = useSelector((state) => state);
-    const { health } = state;
+    const { health, players } = state;
 
-    const [styles, setStyles] = useState({})
+    const dispatch = useDispatch();
+
+    const incHealth = (e) => {
+        let tmpPlayer = {...player, hp: ++player.hp};
+        let tmpPlayers = players.filter(p => {
+            if(p.name == player.name){
+                return tmpPlayer;
+            }
+            else{
+                return p
+            }
+        })
+        console.log(tmpPlayers)
+        dispatch({
+            type: UPDATE_PLAYER,
+            players: tmpPlayers
+        })
+
+    }
+
+    const decHealth = (e) => {
+        let tmpPlayer = {...player, hp: --player.hp};
+        let tmpPlayers = players.filter(p => {
+            if(p.name == player.name){
+                return tmpPlayer;
+            }
+            else{
+                return p
+            }
+        })
+        console.log(tmpPlayers)
+        dispatch({
+            type: UPDATE_PLAYER,
+            players: tmpPlayers
+        })
+
+    }
+
     let [hp, setHp] = useState(0);
     useEffect(() => {
-        setHp(health)
-    }, [])
+        let tmp = player.hp;
+        
+    }, [player])
 
-    console.log(totalPlayers)
-    useEffect(() => {
-        if (totalPlayers == 2) {
-            const styles = {
-                player: {
-                    height: (100 / totalPlayers) + "%",
-                    backgroundColor: player.color,
-                    transform: player.playerNum == 2 ? 'rotate(180deg)' : "",
-                    margin: '10px',
-                    borderRadius: '10px'
-                },
-                grid: {
-                    width: '100%',
-                    
-                },
-                icon: {
-                    fontSize: '50px',
-                    color: 'white',
-                    marginTop: '23px'
-                },
-                container: {
-                    width: '80%',
-                    margin: 'auto',
-                    paddingTop: '100px'
-                }
-            }
-            setStyles(styles)
-
+    const styles = { 
+        player: {
+            height: (100 / totalPlayers) + "%",
+            backgroundColor: player.color,
+            transform: player.playerNum == 2 ? 'rotate(180deg)' : "",
+            margin: '10px',
+            borderRadius: '10px'
+        },
+        grid: {
+            width: '100%',
+            
+        },
+        icon: {
+            fontSize: '50px',
+            color: 'white',
+            marginTop: '23px'
+        },
+        container: {
+            width: '80%',
+            margin: 'auto',
+            paddingTop: '100px'
         }
-        else if (totalPlayers == 3) {
-            const styles = {
-                player: {
-                    width: player.playerNum > 1 ? '75%' : '100%',
-                    height: player.playerNum > 1 ? '25%' : '100%',
-                    backgroundColor: player.color,
-                    transform: player.playerNum > 1 ? player.playerNum == 2 ? 'rotate(-90deg)' : 'rotate(90deg)' : ''
-                }
-            }
-            setStyles(styles)
-
-        }
-    }, [])
-
-
-
-    console.log(styles)
+    }
 
     return (
         <div style={styles.player}>
@@ -70,13 +89,13 @@ const Player = ({ totalPlayers, playerNum, player }) => {
             <div style={styles.container}>
                 <Grid container style={styles.grid}>
                     <Grid item xs={3}>
-                        <IconButton onClick={e => setHp(++hp)}><AddIcon style={styles.icon} /></IconButton>
+                        <IconButton onClick={incHealth}><AddIcon style={styles.icon} /></IconButton>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant="h1" color="white">{hp}</Typography>
+                        <Typography variant="h1" color="white">{player.hp}</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                    <IconButton onClick={e => setHp(--hp)}><RemoveIcon style={styles.icon} /></IconButton>
+                    <IconButton onClick={decHealth}><RemoveIcon style={styles.icon} /></IconButton>
 
                     </Grid>
                 

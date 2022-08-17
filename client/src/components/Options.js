@@ -1,6 +1,7 @@
 import { Fab } from "@mui/material"
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from "react";
+import Modal from "./Modal";
 
 const style = {
     fab: {
@@ -16,9 +17,12 @@ const Options = () => {
     const [open, setOpen] = useState(0);
 
     return (
-        <Fab color="white" style={style.fab}>
-            <SettingsIcon/>
-        </Fab>
+        <div>
+            <Fab color="white" style={style.fab} onClick={e => setOpen(1)}>
+                <SettingsIcon/>
+            </Fab>
+            <Modal open={open} setOpen={setOpen}/>
+        </div>
     )
 
 }

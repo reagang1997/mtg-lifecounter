@@ -1,23 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Player from "../components/Player";
 import PlayerContainer from "../components/PlayerContainer";
 
 
 const Main = () => {
 
-    const [players, setPlayers] = useState([
-        {
-            name: "Player 1",
-            playerNum: 1,
-            color: 'green'
-        },
-        {
-            name: "Player 3",
-            playerNum: 2,
-            color: 'blue'
-        }
-    ])
-
+    const state = useSelector(state => state);
+    let {players} = state;
+    // players = players.reverse();
     const [totalPlayers, setTotalPlayers] = useState(3)
 
     const style = {
@@ -27,12 +18,16 @@ const Main = () => {
         }
     }
 
+    useEffect(() => {
+        console.log(players)
+    }, [players])
+
  
  
     return (
         <div style={style.main}>
             
-            {players.reverse().map(p => {
+            {players.map(p => {
                 console.log(p)
                 return <Player player={p} totalPlayers={players.length}/>
             })}
